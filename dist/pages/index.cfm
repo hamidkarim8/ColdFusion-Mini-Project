@@ -379,7 +379,7 @@
                             <h3 class="mb-0">
                                 <cfset variablename="test">
                                     <cfoutput>
-                                        hello #variablename#
+                                        hello #variablename# hensem
                                     </cfoutput>
                             </h3>
                         </div>
