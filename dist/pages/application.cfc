@@ -1,7 +1,7 @@
 <cfcomponent>
     <cfset this.name = "TestProjectSource">
     <cfset this.sessionManagement = true>
-    <cfset this.sessionTimeout = createTimeSpan(0, 0, 15, 0)>
+    <cfset this.sessionTimeout = createTimeSpan(0, 0, 30, 0)>
     <cfset this.applicationTimeout = createTimeSpan(5, 0, 0, 0)>
 
     <cffunction name="onApplicationStart" returnType="boolean">
