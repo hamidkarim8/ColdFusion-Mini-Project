@@ -4,10 +4,10 @@
     <div class="sidebar-wrapper">
         <nav class="mt-2"> <!--begin::Sidebar Menu-->
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="menu" data-accordion="false">
-                <li class="nav-item"> <a href="./dashboard.cfm" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                <li class="nav-item"> <a href="./dashboard.cfm" class="nav-link"> <i class="nav-icon bi bi-wallet2"></i>
                     <p>Select Fund</p>
                 </a> </li>
-                <li class="nav-item"> <a href="./fundRecord.cfm" class="nav-link"> <i class="nav-icon bi bi-circle"></i>
+                <li class="nav-item"> <a href="./fundRecord.cfm" class="nav-link"> <i class="nav-icon bi bi-file-earmark-text"></i>
                     <p>Fund Record</p>
                 </a> </li>
                 <cfif session.roleID EQ "1">
@@ -22,13 +22,13 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item"> 
                                 <a href="./registerForm.cfm" class="nav-link"> 
-                                    <i class="nav-icon bi bi-circle"></i>
+                                    <i class="nav-icon bi bi-person-plus"></i>
                                     <p>User Registration</p>
                                 </a> 
                             </li>
                             <li class="nav-item"> 
                                 <a href="./userRecord.cfm" class="nav-link"> 
-                                    <i class="nav-icon bi bi-circle"></i>
+                                    <i class="nav-icon bi bi-person-lines-fill"></i>
                                     <p>User Record</p>
                                 </a> 
                             </li>
@@ -38,7 +38,7 @@
                     <!-- Only show the User Record link if role is not 1 -->
                     <li class="nav-item"> 
                         <a href="./userRecord.cfm" class="nav-link"> 
-                            <i class="nav-icon bi bi-circle"></i>
+                            <i class="nav-icon bi bi-person-lines-fill"></i>
                             <p>User Record</p>
                         </a> 
                     </li>
