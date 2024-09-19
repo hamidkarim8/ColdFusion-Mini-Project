@@ -1,21 +1,21 @@
 <cfset assetClassIds = DeserializeJSON(form.assetClassIds)>
 <cfset fundManagerIds = DeserializeJSON(form.fundManagerIds)>
 
-<cfset formattedAssetClassIds = arrayToList(assetClassIds, "','")>
-<cfset formattedFundManagerIds = arrayToList(fundManagerIds, "','")>
+<cfset formattedAssetClassIds = arrayToList(assetClassIds, ",")>
+<cfset formattedFundManagerIds = arrayToList(fundManagerIds, ",")>
 
 <cfquery name="getFundNames" datasource="TestProjectSource">
     SELECT [UID], [Name]
     FROM [TestProject].[dbo].[FS_UnitTrust]
     WHERE 
     <cfif arrayLen(assetClassIds) GT 0>
-        [AssetClassId] IN ('<cfoutput>#formattedAssetClassIds#</cfoutput>')
+        [AssetClassId] IN (<cfqueryparam value="#formattedAssetClassIds#" cfsqltype="cf_sql_varchar" list="true">)
     <cfelse>
         1=1
     </cfif>
     AND
     <cfif arrayLen(fundManagerIds) GT 0>
-        [FundMgrUID] IN ('<cfoutput>#formattedFundManagerIds#</cfoutput>')
+        [FundMgrUID] IN (<cfqueryparam value="#formattedFundManagerIds#" cfsqltype="cf_sql_varchar" list="true">)
     <cfelse>
         1=1
     </cfif>
