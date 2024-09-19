@@ -58,7 +58,7 @@
                         <div class="card-header">
                             <div class="card-title">Select Fund</div>
                         </div> <!--end::Header--> <!--begin::Form-->
-                        <form method="post">
+                        <form method="post" action="actions/insertFundName.cfm">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -80,7 +80,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <h6 class="fw-semibold">Fund Name</h6>
-                                            <select class="js-example-basic-single form-select" name="fund_name[]" data-placeholder="Select a Fund Name">
+                                            <select class="js-example-basic-single form-select" name="fund_name" data-placeholder="Select a Fund Name">
                                             </select>
                                         </div>
                                     </div>
@@ -88,7 +88,7 @@
                             </div>
                             <!-- Submit button -->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
                     </div> <!--end::Quick Example-->
@@ -140,27 +140,28 @@
 
             // Load Fund Names
             function loadFundNames() {
-            var selectedAssetClasses = $('select[name="asset_class[]"]').val() || [];
-            var selectedFundManagers = $('select[name="fund_management[]"]').val() || [];
+                var selectedAssetClasses = $('select[name="asset_class[]"]').val() || [];
+                var selectedFundManagers = $('select[name="fund_management[]"]').val() || [];
 
-            $.ajax({
-                url: 'actions/getFilteredFundNames.cfm',
-                type: 'POST',
-                data: {
-                    assetClassIds: JSON.stringify(selectedAssetClasses),
-                    fundManagerIds: JSON.stringify(selectedFundManagers)
-                },
-                success: function(data) {
-                    var fundNames = JSON.parse(data);
-                    console.log(fundNames);
-                    var $fundNameSelect = $('select[name="fund_name[]"]');
-                    $fundNameSelect.empty();
-                    $.each(fundNames, function(key, value) {
-                        $fundNameSelect.append('<option value="'+value.ID+'">'+value.NAME+'</option>');
-                    });
-                }
-            });
-        }
+                $.ajax({
+                    url: 'actions/getFilteredFundNames.cfm',
+                    type: 'POST',
+                    data: {
+                        assetClassIds: JSON.stringify(selectedAssetClasses),
+                        fundManagerIds: JSON.stringify(selectedFundManagers)
+                    },
+                    success: function(data) {
+                        var fundNames = JSON.parse(data);
+                        var $fundNameSelect = $('select[name="fund_name"]');
+                        $fundNameSelect.empty();
+                        $.each(fundNames, function(key, value) {
+                            // Combine FUNDUID and FUNDNAME into the value attribute
+                            $fundNameSelect.append('<option value="'+value.ID+','+value.NAME+'">'+value.NAME+'</option>');
+                        });
+                    }
+                });
+            }
+
 
             $('select[name="asset_class[]"], select[name="fund_management[]"]').on('change', loadFundNames);
         });
