@@ -1,9 +1,8 @@
-<cfif isDefined("form.submit")> <!-- Check if form is submitted -->
-    <cfif structKeyExists(session, "userName")> <!-- Ensure session contains userName -->
+<cfif isDefined("form.submit")>
+    <cfif structKeyExists(session, "userName")>
         <cfset fundUID = listFirst(form.fund_name)>
         <cfset fundName = listGetAt(form.fund_name, 2)>
         
-        <!-- Perform the insertion into the SelectedFund table -->
         <cfquery datasource="TestProjectSource">
             INSERT INTO SelectedFund (FUNDUID, FUNDNAME, CreatedBy, CreatedDate)
             VALUES (
@@ -14,7 +13,6 @@
             )
         </cfquery>
 
-        <!-- Redirect to the fund list page or another success page -->
         <cflocation url="../fundRecord.cfm">
     </cfif>
 </cfif>
