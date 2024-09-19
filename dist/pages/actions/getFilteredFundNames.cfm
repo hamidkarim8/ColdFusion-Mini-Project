@@ -19,6 +19,7 @@
     <cfelse>
         1=1
     </cfif>
+    ORDER BY [Name] ASC
 </cfquery>
 
 <cfset result = []>
