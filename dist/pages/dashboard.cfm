@@ -138,10 +138,15 @@
                 }
             });
 
-            // Load Fund Names
             function loadFundNames() {
                 var selectedAssetClasses = $('select[name="asset_class[]"]').val() || [];
                 var selectedFundManagers = $('select[name="fund_management[]"]').val() || [];
+                var $fundNameSelect = $('select[name="fund_name"]');
+
+                if (selectedAssetClasses.length === 0 && selectedFundManagers.length === 0) {
+                    $fundNameSelect.empty();
+                    return;
+                }
 
                 $.ajax({
                     url: 'actions/getFilteredFundNames.cfm',
@@ -152,10 +157,8 @@
                     },
                     success: function(data) {
                         var fundNames = JSON.parse(data);
-                        var $fundNameSelect = $('select[name="fund_name"]');
                         $fundNameSelect.empty();
                         $.each(fundNames, function(key, value) {
-                            // Combine FUNDUID and FUNDNAME into the value attribute
                             $fundNameSelect.append('<option value="'+value.ID+','+value.NAME+'">'+value.NAME+'</option>');
                         });
                     }
